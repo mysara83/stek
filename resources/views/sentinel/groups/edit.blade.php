@@ -1,13 +1,10 @@
-@extends(config('sentinel.layout'))
+@extends('templat.rangka')
 
 {{-- Web site Title --}}
-@section('title')
-@parent
-Edit Group
-@stop
+@section('tajuk', 'Edit group')
 
 {{-- Content --}}
-@section('content')
+@section('isi')
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <form method="POST" action="{{ route('sentinel.groups.update', $group->hash) }}" accept-charset="UTF-8">

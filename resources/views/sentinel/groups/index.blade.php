@@ -1,13 +1,10 @@
-@extends(config('sentinel.layout'))
+@extends('templat.rangka')
 
 {{-- Web site Title --}}
-@section('title')
-@parent
-Groups
-@stop
+@section('tajuk', 'Kumpulan Pengguna')
 
 {{-- Content --}}
-@section('content')
+@section('isi')
 <div class="row">
     <div class='page-header'>
         <div class='btn-toolbar pull-right'>
@@ -51,7 +48,7 @@ Groups
         </table>
     </div>
 </div>
-<!--  
+<!--
 	The delete button uses Resftulizer.js to restfully submit with "Delete".  The "action_confirm" class triggers an optional confirm dialog.
 	Also, I have hardcoded adding the "disabled" class to the Admin group - deleting your own admin access causes problems.
 -->

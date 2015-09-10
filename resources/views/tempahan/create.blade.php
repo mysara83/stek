@@ -2,12 +2,22 @@
 
 @section('tajuk', 'Tempahan Baru')
 
+@section('css')
+<style>
+	.entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+</style>
+@endsection
+
 @section('isi')
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
 		<div class="panel panel-default">
 			<div class="panel-heading">Borang Tempahan Kenderaan</div>
 			<div class="panel-body">
+			<div class="controls">
 				{!! Form::open(['class' => 'form-horizontal']) !!}
 					<p class="text-right">Butiran Pemohon</p>
 					<div class="form-group">
@@ -54,19 +64,19 @@
 						</div>
 					</div>
 					<p class="text-right">Butiran Penumpang</p>
-					 @for ($i=1; $i < 3; $i++)
-						<div class="form-group">
-							{!! Form::label('penumpang', 'Penumpang '.$i, ['class' => 'col-md-2 control-label']) !!}
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="penumpang[{{ $i }}]" value="{{ str_random(11) }}">
-							</div>
-						</div>
-					@endfor
 					<div class="form-group">
-						<div class="col-md-6 col-md-offset-4">
-							<button type="submit" class="btn btn-default btn-xs" style="margin-right: 15px;">
-								Add New
-							</button>
+						{!! Form::label('penumpang', 'Penumpang', ['class' => 'col-md-2 control-label']) !!}
+						<div class="col-md-10">
+
+							 <div class="entry input-group col-md-12">
+						              <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+						              <span class="input-group-btn">
+						                    <button class="btn btn-success btn-add" type="button">
+						                         <span class="glyphicon glyphicon-plus"></span>
+						                    </button>
+						             </span>
+						       </div>
+
 						</div>
 					</div>
 					<div class="form-group">
@@ -75,7 +85,36 @@
 						</div>
 					</div>
 				{!! Form::close() !!}
+				</div>
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('js')
+<script>
+$(function()
+{
+    $(document).on('click', '.btn-add', function(e)
+    {
+        e.preventDefault();
+
+        var controlForm = $('.controls form:first'),
+            currentEntry = $(this).parents('.entry:first'),
+            newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+        newEntry.find('input').val('');
+        controlForm.find('.entry:not(:last) .btn-add')
+            .removeClass('btn-add').addClass('btn-remove')
+            .removeClass('btn-success').addClass('btn-danger')
+            .html('<span class="glyphicon glyphicon-minus"></span>');
+    }).on('click', '.btn-remove', function(e)
+    {
+		$(this).parents('.entry:first').remove();
+
+		e.preventDefault();
+		return false;
+	});
+    	});
+</script>
 @endsection

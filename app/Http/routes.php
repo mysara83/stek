@@ -41,3 +41,11 @@ Route::post('/tempahan/baru', [
 	'as'		=> 	'pengguna.tempahan',
 	'uses'	=>	'TempahanController@store'
 ]);
+
+/**
+ * Pemandu
+ */
+Route::get('/pemandu', [
+	'as'		=> 	'pemandu.index',
+	'uses'	=>	'PemanduController@index'
+]);

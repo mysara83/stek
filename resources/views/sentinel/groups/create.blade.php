@@ -1,13 +1,10 @@
-@extends(config('sentinel.layout'))
+@extends('templat.rangka')
 
 {{-- Web site Title --}}
-@section('title')
-@parent
-Create Group
-@stop
+@section('tajuk', 'Create new group')
 
 {{-- Content --}}
-@section('content')
+@section('isi')
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <form method="POST" action="{{ route('sentinel.groups.store') }}" accept-charset="UTF-8">
@@ -27,7 +24,7 @@ Create Group
                         <input name="permissions[{{ $permission }}]" value="1" type="checkbox"
                         @if (Input::old('permissions[' . $permission .']'))
                            checked
-                        @endif        
+                        @endif
                         > {{ ucwords($permission) }}
                     </label>
                 @endforeach
