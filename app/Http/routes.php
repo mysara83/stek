@@ -11,6 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+	'as'		=> 	'utama',
+	'uses'	=>	'UtamaController@index'
+]);
+
+Route::get('/dashboard', [
+	'as'		=> 	'dashboard',
+	'uses'	=>	'UtamaController@index'
+]);
+
+/**
+ * Carian
+ */
+Route::get('/carian', [
+	'as'		=> 	'carian.keputusan',
+	'uses'	=>	'CarianController@getKeputusan'
+]);
