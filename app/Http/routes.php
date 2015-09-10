@@ -28,3 +28,16 @@ Route::get('/carian', [
 	'as'		=> 	'carian.keputusan',
 	'uses'	=>	'CarianController@getKeputusan'
 ]);
+
+/**
+ * Tempahan
+ */
+Route::get('/tempahan/baru', [
+	'as'		=> 	'pengguna.tempahan',
+	'uses'	=>	'TempahanController@create'
+]);
+
+Route::post('/tempahan/baru', [
+	'as'		=> 	'pengguna.tempahan',
+	'uses'	=>	'TempahanController@store'
+]);
