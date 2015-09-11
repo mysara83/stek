@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Session;
 use Sentinel\Models\User;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\TempahanRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -42,7 +42,7 @@ class TempahanController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(TempahanRequest $request)
     {
         $input = $request->all();
         dd($input);
