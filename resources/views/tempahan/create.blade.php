@@ -3,12 +3,9 @@
 @section('tajuk', 'Tempahan Baru')
 
 @section('css')
-<style>
-	.entry:not(:first-of-type)
-{
-    margin-top: 10px;
-}
-</style>
+<style type="text/css">
+		.row{margin:10px -15px;}
+	</style>
 @endsection
 
 @section('isi')
@@ -17,13 +14,13 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Borang Tempahan Kenderaan</div>
 			<div class="panel-body">
-			<div class="controls">
 				{!! Form::open(['class' => 'form-horizontal']) !!}
 					<p class="text-right">Butiran Pemohon</p>
 					<div class="form-group">
 						{!! Form::label('nama', 'Nama Pemohon', ['class' => 'col-md-2 control-label']) !!}
 						<div class="col-md-10">
 							{!! Form::text('nama', $pengguna->first_name, ['class' => 'form-control']) !!}
+							{{ ($errors->has('nama') ? $errors->first('nama') : '') }}
 						</div>
 					</div>
 					<div class="form-group">
@@ -65,18 +62,34 @@
 					</div>
 					<p class="text-right">Butiran Penumpang</p>
 					<div class="form-group">
-						{!! Form::label('penumpang', 'Penumpang', ['class' => 'col-md-2 control-label']) !!}
+						{!! Form::label('penumpang', 'Penumpang', ['class' => 'col-md-2 control-label', 'style' => 'margin-top:10px;']) !!}
 						<div class="col-md-10">
-
-							 <div class="entry input-group col-md-12">
-						              <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
-						              <span class="input-group-btn">
-						                    <button class="btn btn-success btn-add" type="button">
-						                         <span class="glyphicon glyphicon-plus"></span>
-						                    </button>
-						             </span>
-						       </div>
-
+							<div id="example-2" class="content">
+								<div class="row">
+									<div class="col-md-6">
+										{!! Form::label('tujuan', 'Nama Woi', ['class' => 'control-label']) !!}
+									</div>
+									<div class="col-md-5">
+										{!! Form::label('tujuan', 'No. Telefon', ['class' => 'control-label']) !!}
+									</div>
+									<div class="col-md-1">
+										<button type="button" id="btnAdd-2" class="btn btn-primary btn-sm pull-right">+</button>
+									</div>
+								</div>
+								<div class="row group">
+									<div class="col-md-6">
+										<input type="text" name="nama_penumpang[]" class="form-control">
+										{{ ($errors->has('nama_penumpang') ? $errors->first('nama_penumpang') : '') }}
+									</div>
+									<div class="col-md-5">
+										<input type="text" name="no_telefon_penumpang[]" class="form-control">
+										{{ ($errors->has('no_telefon_penumpang') ? $errors->first('no_telefon_penumpang') : '') }}
+									</div>
+									<div class="col-md-1">
+										<button type="button" class="btn btn-danger btnRemove btn-sm pull-right">-</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -85,36 +98,18 @@
 						</div>
 					</div>
 				{!! Form::close() !!}
-				</div>
 			</div>
 		</div>
 	</div>
 @endsection
 
 @section('js')
+<script src="{{ asset('js/jquery.multifield.min.js') }}"></script>
 <script>
-$(function()
-{
-    $(document).on('click', '.btn-add', function(e)
-    {
-        e.preventDefault();
-
-        var controlForm = $('.controls form:first'),
-            currentEntry = $(this).parents('.entry:first'),
-            newEntry = $(currentEntry.clone()).appendTo(controlForm);
-
-        newEntry.find('input').val('');
-        controlForm.find('.entry:not(:last) .btn-add')
-            .removeClass('btn-add').addClass('btn-remove')
-            .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="glyphicon glyphicon-minus"></span>');
-    }).on('click', '.btn-remove', function(e)
-    {
-		$(this).parents('.entry:first').remove();
-
-		e.preventDefault();
-		return false;
-	});
-    	});
+$('#example-2').multifield({
+	section: '.group',
+	btnAdd:'#btnAdd-2',
+	btnRemove:'.btnRemove'
+});
 </script>
 @endsection
