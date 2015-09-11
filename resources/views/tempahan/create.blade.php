@@ -14,13 +14,27 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Borang Tempahan Kenderaan</div>
 			<div class="panel-body">
+				@if (count($errors) > 0)
+				<div class="row">
+				<div class="col-md-10 col-md-offset-2">
+				<div class="alert alert-danger">
+					<strong>Whoops!</strong> There were some problems with your input.<br><br>
+					<ul>
+				@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+				@endforeach
+					</ul>
+				</div>
+				</div>
+				</div>
+				@endif
 				{!! Form::open(['class' => 'form-horizontal']) !!}
 					<p class="text-right">Butiran Pemohon</p>
 					<div class="form-group {{ ($errors->has('nama')) ? 'has-error' : '' }}">
 						{!! Form::label('nama', 'Nama Pemohon', ['class' => 'col-md-2 control-label']) !!}
 						<div class="col-md-10">
 							{!! Form::text('nama', $pengguna->first_name, ['class' => 'form-control']) !!}
-						             {{ ($errors->has('nama') ? $errors->first('nama') : '') }}
+									 {{ ($errors->has('nama') ? $errors->first('nama') : '') }}
 						</div>
 					</div>
 					<div class="form-group">
@@ -34,7 +48,7 @@
 							<div class="form-group">
 								{!! Form::label('bahagian', 'Bahagian', ['class' => 'col-md-4 control-label']) !!}
 								<div class="col-md-8">
-									{!! Form::text('bahagian', $pengguna->first_name, ['class' => 'form-control']) !!}
+									{!! Form::select('bahagian', $bahagian ,$pengguna->bahagian, ['class' => 'form-control']) !!}
 								</div>
 							</div>
 						</div>
@@ -61,7 +75,7 @@
 						</div>
 					</div>
 					<p class="text-right">Butiran Penumpang</p>
-					<div class="form-group">
+					<div class="form-group  {{ ($errors->has('nama_penumpang.0')) ? 'has-error' : '' }}">
 						{!! Form::label('penumpang', 'Penumpang', ['class' => 'col-md-2 control-label', 'style' => 'margin-top:10px;']) !!}
 						<div class="col-md-10">
 							<div id="example-2" class="content">
@@ -77,11 +91,11 @@
 									</div>
 								</div>
 								<div class="row group">
-									<div class="col-md-6 {{ ($errors->has('nama_penumpang')) ? 'has-error' : '' }}">
+									<div class="col-md-6">
 										<input type="text" name="nama_penumpang[]" class="form-control">
 										{{ ($errors->has('nama_penumpang') ? $errors->first('nama_penumpang') : '') }}
 									</div>
-									<div class="col-md-5 {{ ($errors->has('no_telefon_penumpang')) ? 'has-error' : '' }}">
+									<div class="col-md-5">
 										<input type="text" name="no_telefon_penumpang[]" class="form-control">
 										{{ ($errors->has('no_telefon_penumpang') ? $errors->first('no_telefon_penumpang') : '') }}
 									</div>

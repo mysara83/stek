@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bahagian;
 use Session;
 use Sentinel\Models\User;
 use Illuminate\Http\Request;
@@ -33,7 +34,10 @@ class TempahanController extends Controller
     public function create()
     {
         $pengguna = User::findOrFail(Session::get('userId'));
-        return view('tempahan.create', compact('pengguna'));
+
+        $bahagian = Bahagian::lists('nama', 'id');
+
+        return view('tempahan.create', compact('pengguna', 'bahagian'));
     }
 
     /**

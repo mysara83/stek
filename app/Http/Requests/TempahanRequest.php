@@ -42,6 +42,7 @@ class TempahanRequest extends Request
 		foreach($this->request->get('nama_penumpang') as $key => $val)
 		{
 		$messages['nama_penumpang.'.$key.'.max'] = 'The field labeled "Book Title '.$key.'" must be less than :max characters.';
+		$messages['nama_penumpang.'.$key.'.required'] = 'Nama penumpang perlu diisi.';
 		}
 		return $messages;
 	}
