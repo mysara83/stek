@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use App\Tempahan;
 use Flash;
 use Illuminate\Http\Request;
-
+use Sentry;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +19,8 @@ class UtamaController extends Controller
      */
     public function index()
     {
-        return view('halaman.utama');
+        $tempahan = Tempahan::all();
+        return view('halaman.utama', compact('tempahan'));
     }
 
     /**
@@ -25,9 +28,11 @@ class UtamaController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function test()
     {
-        //
+        // $user = Sentry::findUserById(Session::get('userId'));
+        // dd($user);
+        return view('test');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tempahan;
 use App\Bahagian;
 use Session;
 use Sentinel\Models\User;
@@ -48,8 +49,13 @@ class TempahanController extends Controller
      */
     public function store(TempahanRequest $request)
     {
-        $input = $request->all();
-        dd($input);
+        $tempahan = $request->all();
+        $tempahan = Tempahan::create($request->all());
+       //  foreach ($request->get('nama_penumpang') as $row) {
+       // $tempahan->penumpang()->create($request->all());
+       //  }
+
+        dd($tempahan);
     }
 
     /**

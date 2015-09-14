@@ -21,6 +21,11 @@ Route::get('/dashboard', [
 	'uses'	=>	'UtamaController@index'
 ]);
 
+Route::get('/test', [
+	'as'		=> 	'test',
+	'uses'	=>	'UtamaController@test'
+]);
+
 /**
  * Carian
  */

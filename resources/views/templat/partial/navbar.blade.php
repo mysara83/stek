@@ -14,10 +14,11 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				  @if (Sentry::check())
+				 {{--  @if (Sentry::check()) --}}
 				  	<li {{ (Request::is('tempahan*') ? 'class=active' : '') }}><a href="{{ route('pengguna.tempahan') }}">Tempahan Baru</a></li>
 				  	<li {{ (Request::is('pemandu*') ? 'class=active' : '') }}><a href="{{ route('pemandu.index') }}">Pemandu</a></li>
-				  @endif
+				  	<li {{ (Request::is('pemandu*') ? 'class=active' : '') }}><a href="{{ route('test') }}">Test</a></li>
+				 {{--  @endif --}}
 				@if (Sentry::check() && Sentry::getUser()->hasAccess('admin'))
 					<li class="dropdown {{ (Request::is('pentadbir*') ? 'active' : '') }}">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Menu Pentadbir <span class="caret"></span></a>
